@@ -23,9 +23,10 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -i ~/.ssh/id_rsa ubuntu@3.85.244.3 << 'EOF'
+            sudo git config --global --add safe.directory /var/www/html
             cd /var/www/html
             sudo git reset --hard
-            sudo git pull origin main  # Pull latest changes instead of cloning
+            sudo git pull origin main  # Pull latest changes
             sudo chown -R www-data:www-data /var/www/html
             sudo chmod -R 755 /var/www/html
             sudo systemctl restart nginx
