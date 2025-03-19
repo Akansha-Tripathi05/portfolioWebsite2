@@ -23,7 +23,8 @@ jobs:
       - name: Deploy to EC2
         run: |
           ssh -i ~/.ssh/id_rsa ubuntu@3.85.244.3 << 'EOF'
-            cd /var/www/html
-            git pull origin main  # Pull latest changes
+            sudo rm -rf /var/www/html/*
+            sudo git clone https://github.com/Akansha-Tripathi05/portfolioWebsite2.git /var/www/html
+            sudo chown -R www-data:www-data /var/www/html
             sudo systemctl restart nginx
           EOF
